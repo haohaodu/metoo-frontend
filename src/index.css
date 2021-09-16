@@ -2,10 +2,24 @@
 
 /** @format */
 
-html,
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   margin: 0px;
   padding: 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  background: #121212;
+}
+
+div {
+  color: white;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
 }

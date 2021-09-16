@@ -3,13 +3,18 @@
 import styled from "styled-components";
 
 export const HeaderMain = styled.div`
+  z-index: 30;
+  width: 100%;
+  position: fixed;
+`;
+
+export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5em 2.5em;
-  margin: 0 2em;
-  height: 4em;
-  position: sticky;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 `;
 
 export const RightContainer = styled.div`
