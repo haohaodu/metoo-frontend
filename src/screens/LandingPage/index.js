@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import store from "store";
+import FadeIn from "react-fade-in";
 
 import { HeaderTwo } from "constants/fonts";
 import { HeaderText, Logo, HeaderWrapper, LandingMain } from "./styles";
@@ -19,19 +20,21 @@ const LandingPage = () => {
   };
 
   return (
-    <LandingMain>
-      <HeaderWrapper>
-        <HeaderText>
-          <Logo src={LogoLarge} alt="logo" />
-          <HeaderTwo>Metoo</HeaderTwo>
-        </HeaderText>
-        <SearchBar
-          queryText={queryText}
-          setQueryText={setQueryText}
-          handleClick={handleClick}
-        />
-      </HeaderWrapper>
-    </LandingMain>
+    <FadeIn delay={500}>
+      <LandingMain>
+        <HeaderWrapper id="example-fade-text">
+          <HeaderText>
+            <Logo src={LogoLarge} alt="logo" />
+            <HeaderTwo>Metoo</HeaderTwo>
+          </HeaderText>
+          <SearchBar
+            queryText={queryText}
+            setQueryText={setQueryText}
+            handleClick={handleClick}
+          />
+        </HeaderWrapper>
+      </LandingMain>
+    </FadeIn>
   );
 };
 
