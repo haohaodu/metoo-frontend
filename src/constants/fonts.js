@@ -3,10 +3,11 @@
 import styled from "styled-components";
 import { white } from "./colors";
 
-export const HeaderFive = styled.h5`
+export const HeaderFive = styled.div`
   font-weight: normal;
   font-size: 1.25em;
   color: ${white};
+  margin: 0.25em 0;
 `;
 
 export const HeaderThree = styled.div`
@@ -17,4 +18,10 @@ export const HeaderThree = styled.div`
 export const HeaderTwo = styled.div`
   font-weight: 300;
   font-size: 4em;
+`;
+
+export const BodyTwo = styled.div`
+  font-weight: 700;
+  font-size: 0.75em;
+  color: black;
 `;

@@ -11,8 +11,8 @@ export const DetailsContainer = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
-  padding-top: 10em;
+  width: 70%;
+  margin-top: 10em;
 `;
 
 export const LeftColumn = styled.div`
@@ -30,6 +30,9 @@ export const RightColumn = styled.div`
   gap: 4em;
   align-items: flex-start;
   margin-left: 2em;
+  height: 40em;
+  overflow-y: scroll;
+  width: 100%;
 `;
 
 export const Section = styled.div`
@@ -45,4 +48,11 @@ export const Row = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
+`;
+
+export const BorderedSection = styled.div`
+  border: 2px solid #121212;
+  display: flex;
+  flex-direction: column;
+  gap: 0em;
 `;

@@ -20,7 +20,11 @@ const ProductPage = () => {
     setType(e.target.value);
   };
 
-  const handleClick = (newUrl) => {
+  const handleClick = (newUrl, productId) => {
+    store.set(
+      "currProduct",
+      products.find(({ id }) => productId === id)
+    );
     history.push(newUrl);
   };
 
@@ -30,10 +34,7 @@ const ProductPage = () => {
     const queryUrl = `products?` + nameStr + typeStr;
     axios
       .get(`http://localhost:5000/` + queryUrl)
-      .then(({ data: { data } }) => {
-        console.log("product list in axios: ", data);
-        setProducts(data);
-      })
+      .then(({ data: { data } }) => setProducts(data))
       .catch((e) => {
         console.log("error: ", e);
         setProducts([]);
@@ -63,7 +64,7 @@ const ProductPage = () => {
               length={length}
               height={height}
               stock={stock}
-              handleClick={handleClick(`/product/${id}`)}
+              handleClick={handleClick}
             />
           ))}
       </SearchContainer>

@@ -20,18 +20,22 @@ const ProductCard = ({
 }) => {
   return (
     <Card sx={{ maxWidth: 500 }}>
-      <CardHeader title={name} subheader={id} />
+      <CardHeader title={name} subheader={`Product Id: ${id}`} />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           Price: ${price} <br />
-          Width: {width}cm <br />
-          Length: {length}cm <br />
-          Height: {height}cm <br />
           Stock: {stock} <br />
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button onClick={() => handleClick()}>View</Button>
+        <Button
+          onClick={() => {
+            console.log(`/product/${id}`);
+            handleClick(`/product/${id}`, id);
+          }}
+        >
+          View
+        </Button>
       </CardActions>
     </Card>
   );

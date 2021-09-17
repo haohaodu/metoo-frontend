@@ -6,6 +6,7 @@ export const HeaderMain = styled.div`
   z-index: 30;
   width: 100%;
   position: fixed;
+  top: 2em;
 `;
 
 export const HeaderInner = styled.div`
