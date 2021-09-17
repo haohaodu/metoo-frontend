@@ -5,6 +5,7 @@ import StickyHeader from "components/Header";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LandingPage from "screens/LandingPage";
 import ProductPage from "screens/ProductPage";
+import ProductDetail from "screens/ProductDetail";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,7 +23,8 @@ const App = () => {
         <StickyHeader />
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/products" exact component={ProductPage} />
+          <Route path="/product" exact component={ProductPage} />
+          <Route path="/product/:id" exact component={ProductDetail} />
         </Switch>
       </Router>
     </ThemeProvider>

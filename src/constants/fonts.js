@@ -9,7 +9,12 @@ export const HeaderFive = styled.h5`
   color: ${white};
 `;
 
+export const HeaderThree = styled.div`
+  font-weight: 400;
+  font-size: 2.5em;
+`;
+
 export const HeaderTwo = styled.div`
   font-weight: 300;
-  font-size: 3em;
+  font-size: 4em;
 `;

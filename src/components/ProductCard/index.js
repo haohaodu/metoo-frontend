@@ -8,7 +8,16 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 
-const ProductCard = ({ name, id, price, width, length, height, stock }) => {
+const ProductCard = ({
+  name,
+  id,
+  price,
+  width,
+  length,
+  height,
+  stock,
+  handleClick,
+}) => {
   return (
     <Card sx={{ maxWidth: 500 }}>
       <CardHeader title={name} subheader={id} />
@@ -22,7 +31,7 @@ const ProductCard = ({ name, id, price, width, length, height, stock }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button>View</Button>
+        <Button onClick={() => handleClick()}>View</Button>
       </CardActions>
     </Card>
   );

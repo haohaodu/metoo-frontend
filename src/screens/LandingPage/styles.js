@@ -6,7 +6,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 30em;
-  gap: 2em;
+  gap: 3em;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 10em;
@@ -19,8 +19,8 @@ export const HeaderText = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 2.5em;
-  width: 2.5em;
+  height: 2.75em;
+  width: 2.75em;
 `;
 
 export const LandingMain = styled.div`

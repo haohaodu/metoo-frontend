@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import store from "store";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import { ProductMain, QueryTypes, SearchContainer } from "./styles";
 import SearchBar from "components/SearchBar";
@@ -13,16 +14,20 @@ const ProductPage = () => {
   const [queryText, setQueryText] = useState(store.get("query"));
   const [products, setProducts] = useState([]);
   const [type, setType] = useState("all");
+  const history = useHistory();
 
   const handleChangeType = (e) => {
     setType(e.target.value);
   };
 
-  const handleClick = () => {
+  const handleClick = (newUrl) => {
+    history.push(newUrl);
+  };
+
+  const handleSearch = () => {
     const nameStr = queryText ? `name=` + queryText + `&` : ``;
     const typeStr = type === `instock` ? `instock=true` : ``;
     const queryUrl = `products?` + nameStr + typeStr;
-    console.log("queryUrl: ", queryUrl);
     axios
       .get(`http://localhost:5000/` + queryUrl)
       .then(({ data: { data } }) => {
@@ -41,7 +46,7 @@ const ProductPage = () => {
         <SearchBar
           queryText={queryText}
           setQueryText={setQueryText}
-          handleClick={handleClick}
+          handleClick={handleSearch}
         />
         <QueryTypes>
           <Dropdown value={type} handleChange={handleChangeType} />
@@ -58,6 +63,7 @@ const ProductPage = () => {
               length={length}
               height={height}
               stock={stock}
+              handleClick={handleClick(`/product/${id}`)}
             />
           ))}
       </SearchContainer>
