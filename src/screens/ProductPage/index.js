@@ -21,10 +21,10 @@ const ProductPage = () => {
   const handleClick = () => {
     const nameStr = queryText ? `name=` + queryText + `&` : ``;
     const typeStr = type === `instock` ? `instock=true` : ``;
-    const queryUrl = `http://localhost:5000/products?` + nameStr + typeStr;
+    const queryUrl = `products?` + nameStr + typeStr;
     console.log("queryUrl: ", queryUrl);
     axios
-      .get(queryUrl)
+      .get(`http://localhost:5000/` + queryUrl)
       .then(({ data: { data } }) => {
         console.log("product list in axios: ", data);
         setProducts(data);
