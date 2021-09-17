@@ -2,27 +2,37 @@
 
 import React, { useState } from "react";
 import store from "store";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
+import axios from "axios";
 
 import { ProductMain, QueryTypes, SearchContainer } from "./styles";
 import SearchBar from "components/SearchBar";
 import Dropdown from "components/Dropdown";
+import ProductCard from "components/ProductCard";
 
 const ProductPage = () => {
   const [queryText, setQueryText] = useState(store.get("query"));
-  const [type, setType] = useState(10);
+  const [products, setProducts] = useState([]);
+  const [type, setType] = useState("all");
 
   const handleChangeType = (e) => {
     setType(e.target.value);
   };
 
   const handleClick = () => {
-    console.log("query text: ", queryText);
+    const nameStr = queryText ? `name=` + queryText + `&` : ``;
+    const typeStr = type === `instock` ? `instock=true` : ``;
+    const queryUrl = `http://localhost:5000/products?` + nameStr + typeStr;
+    console.log("queryUrl: ", queryUrl);
+    axios
+      .get(queryUrl)
+      .then(({ data: { data } }) => {
+        console.log("product list in axios: ", data);
+        setProducts(data);
+      })
+      .catch((e) => {
+        console.log("error: ", e);
+        setProducts([]);
+      });
   };
 
   return (
@@ -36,21 +46,21 @@ const ProductPage = () => {
         <QueryTypes>
           <Dropdown value={type} handleChange={handleChangeType} />
         </QueryTypes>
+        {products &&
+          products.length !== 0 &&
+          products.map(({ name, id, price, width, length, height, stock }) => (
+            <ProductCard
+              key={id}
+              name={name}
+              id={id}
+              price={price}
+              width={width}
+              length={length}
+              height={height}
+              stock={stock}
+            />
+          ))}
       </SearchContainer>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardHeader title="Product Name" subheader="Product ID 1" />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            Price: $10.00 <br />
-            Dimensions: 3cm by 3cm by 3cm
-            <br />
-            Stock: 1 <br />
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <Button>View</Button>
-        </CardActions>
-      </Card>
     </ProductMain>
   );
 };

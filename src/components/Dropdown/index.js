@@ -11,8 +11,8 @@ const Dropdown = ({ value, handleChange }) => {
     <FormControl fullWidth>
       <InputLabel>Type</InputLabel>
       <Select value={value} label="Age" onChange={handleChange}>
-        <MenuItem value={10}>all</MenuItem>
-        <MenuItem value={20}>in stock</MenuItem>
+        <MenuItem value={"all"}>all</MenuItem>
+        <MenuItem value={"instock"}>in stock</MenuItem>
       </Select>
     </FormControl>
   );
