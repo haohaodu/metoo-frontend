@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import store from "store";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -15,6 +15,12 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [type, setType] = useState("all");
   const history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/products?name=${queryText}`)
+      .then(({ data: { data } }) => setProducts(data));
+  }, []);
 
   const handleChangeType = (e) => {
     setType(e.target.value);

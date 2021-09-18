@@ -3,9 +3,8 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Button } from "@mui/material";
 
-import { HeaderFive, HeaderThree } from "constants/fonts";
+import { HeaderThree } from "constants/fonts";
 import {
   DetailsMain,
   DetailsContainer,
@@ -13,7 +12,7 @@ import {
   RightColumn,
   Section,
   Row,
-} from "../ProductPage/styles";
+} from "../ProductDetail/styles";
 
 const ProductDetail = () => {
   return (

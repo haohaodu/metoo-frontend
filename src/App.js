@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LandingPage from "screens/LandingPage";
 import ProductPage from "screens/ProductPage";
 import ProductDetail from "screens/ProductDetail";
+import AdminPage from "screens/AdminPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/" exact component={LandingPage} />
           <Route path="/product" exact component={ProductPage} />
           <Route path="/product/:id" exact component={ProductDetail} />
+          <Route path="/admin" exact component={AdminPage} />
         </Switch>
       </Router>
     </ThemeProvider>

@@ -6,8 +6,9 @@ import Rating from "@mui/material/Rating";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import ReviewModal from "components/ReviewModal";
+import axios from "axios";
 
+import ReviewModal from "components/ReviewModal";
 import { HeaderFive, HeaderThree } from "constants/fonts";
 import {
   DetailsMain,
@@ -34,30 +35,55 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(exampleProduct);
   const [rating, setRating] = useState(2.5);
   const [showReviews, setShowReviews] = useState(false);
+
+  const [reviewRating, setReviewRating] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   const { name, id, price, width, length, height, stock, reviews } = product;
   const history = useHistory();
 
   useEffect(() => {
     let tempRating = 0;
-    reviews.map(({ rating }) => (tempRating += rating));
-    setRating(() => tempRating / reviews.length);
+    console.log("current product: ", product);
+    console.log("reviews: ", reviews, reviews.length);
+    if (product.reviews.length !== 0) {
+      reviews.map(({ rating }) => (tempRating += rating));
+      setRating(() => tempRating / reviews.length);
+    }
 
     if (store.get("currProduct")) setProduct(store.get("currProduct"));
   }, [reviews.length]);
 
+  const submitReview = async () => {
+    await axios
+      .post("http://localhost:5000/review", {
+        productId: product.id,
+        rating: reviewRating,
+      })
+      .then(({ data: { message } }) => console.log("Success! ", message))
+      .catch((e) => {
+        console.log("error: ", e);
+        console.log("error params: ", e.message.params);
+      });
+    setOpenModal(false);
+  };
+
   return (
     <DetailsMain>
       <DetailsContainer>
-        <LeftColumn>
-          <ArrowBackIcon
-            onClick={() => history.goBack()}
-            fontSize={"large"}
-            style={{ marginTop: 15, cursor: `pointer` }}
-          />
-        </LeftColumn>
+        <LeftColumn></LeftColumn>
         <RightColumn>
           <Section>
-            <HeaderThree>{name}</HeaderThree>
+            <Row>
+              <ArrowBackIcon
+                onClick={() => history.goBack()}
+                fontSize={"large"}
+                style={{ cursor: `pointer` }}
+              />
+              <HeaderThree>{name}</HeaderThree>
+            </Row>
             <Row>
               <Rating
                 defaultValue={rating}
@@ -89,25 +115,32 @@ const ProductDetail = () => {
             >
               {!showReviews ? "Show Reviews" : "Hide Reviews"}
             </Button>
-            <Button
-              variant="contained"
-              onClick={() => setShowReviews(!showReviews)}
-            >
+            <Button variant="contained" onClick={handleOpen}>
               Leave a Review
             </Button>
           </Row>
-          <ReviewModal name={name} />
+
           <BorderedSection>
             {showReviews &&
               reviews.length !== 0 &&
-              reviews.map(({ rating, index }) => (
-                <HeaderFive key={index}>
+              reviews.map(({ id, rating }) => (
+                <HeaderFive key={id}>
                   Annon rated Product Name {rating} out of 10 stars
                 </HeaderFive>
               ))}
           </BorderedSection>
         </RightColumn>
       </DetailsContainer>
+      {openModal && (
+        <ReviewModal
+          open={openModal}
+          handleClose={handleClose}
+          name={name}
+          rating={reviewRating}
+          setRating={setReviewRating}
+          handleSubmit={submitReview}
+        />
+      )}
     </DetailsMain>
   );
 };
