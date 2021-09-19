@@ -60,7 +60,7 @@ const ReviewModal = ({
                 <BodyTwo>Good</BodyTwo>
               </RatingRow>
             </RatingContainer>
-            <BodyTwo style={{ margin: "1em 0" }}>Rating: {rating}</BodyTwo>
+            <BodyTwo style={{ margin: "1em 0" }}>Rating: {rating * 2}</BodyTwo>
             <Row>
               <Button
                 onClick={handleSubmit}

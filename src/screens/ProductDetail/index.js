@@ -8,7 +8,9 @@ import { Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
+import SnackBar from "components/SnackBar";
 import ReviewModal from "components/ReviewModal";
+import Slide from "@mui/material/Slide";
 import { HeaderFive, HeaderThree } from "constants/fonts";
 import {
   DetailsMain,
@@ -31,30 +33,38 @@ const exampleProduct = {
   reviews: [],
 };
 
+function TransitionDown(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 const ProductDetail = () => {
   const [product, setProduct] = useState(exampleProduct);
   const [rating, setRating] = useState(2.5);
   const [showReviews, setShowReviews] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const [reviewRating, setReviewRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
+  const [transition, setTransition] = useState(undefined);
 
   const { name, id, price, width, length, height, stock, reviews } = product;
   const history = useHistory();
 
   useEffect(() => {
     let tempRating = 0;
-    console.log("current product: ", product);
-    console.log("reviews: ", reviews, reviews.length);
     if (product.reviews.length !== 0) {
       reviews.map(({ rating }) => (tempRating += rating));
       setRating(() => tempRating / reviews.length);
     }
 
     if (store.get("currProduct")) setProduct(store.get("currProduct"));
-  }, [reviews.length]);
+  }, []);
+
+  const handleClose = () => {
+    setOpenModal(false);
+    setTransition(() => TransitionDown);
+    setOpenSnackBar(true);
+  };
 
   const submitReview = async () => {
     await axios
@@ -63,11 +73,8 @@ const ProductDetail = () => {
         rating: reviewRating,
       })
       .then(({ data: { message } }) => console.log("Success! ", message))
-      .catch((e) => {
-        console.log("error: ", e);
-        console.log("error params: ", e.message.params);
-      });
-    setOpenModal(false);
+      .catch((e) => console.log("error params: ", e.message.params));
+    handleClose();
   };
 
   return (
@@ -115,7 +122,7 @@ const ProductDetail = () => {
             >
               {!showReviews ? "Show Reviews" : "Hide Reviews"}
             </Button>
-            <Button variant="contained" onClick={handleOpen}>
+            <Button variant="contained" onClick={() => setOpenModal(true)}>
               Leave a Review
             </Button>
           </Row>
@@ -134,13 +141,22 @@ const ProductDetail = () => {
       {openModal && (
         <ReviewModal
           open={openModal}
-          handleClose={handleClose}
+          handleClose={() => setOpenModal(false)}
           name={name}
           rating={reviewRating}
           setRating={setReviewRating}
           handleSubmit={submitReview}
         />
       )}
+
+      <SnackBar
+        success="Review successfully posted 🥳"
+        error="Mandatory information not filled out."
+        severity={"success"}
+        handleClose={() => setOpenSnackBar(false)}
+        open={openSnackBar}
+        transition={transition}
+      />
     </DetailsMain>
   );
 };

@@ -9,9 +9,11 @@ import { HeaderMain, Logo, RightContainer, HeaderInner } from "./styles";
 const Header = () => (
   <HeaderMain>
     <HeaderInner>
-      <Logo src={logo} alt="Logo" />
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Logo src={logo} alt="Logo" />
+      </Link>
       <RightContainer>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/admin" style={{ textDecoration: "none" }}>
           <HeaderFive>Admin</HeaderFive>
         </Link>
       </RightContainer>

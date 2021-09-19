@@ -31,7 +31,7 @@ export const RightColumn = styled.div`
   align-items: flex-start;
   margin-left: 2em;
   height: 40em;
-  overflow-y: scroll;
+  overflow-y: overlay;
   width: 100%;
 `;
 

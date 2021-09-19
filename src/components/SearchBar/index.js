@@ -5,6 +5,10 @@ import { TextField, Button } from "@mui/material";
 import { SearchContainer } from "./styles";
 
 const SearchBar = ({ queryText, setQueryText, handleClick }) => {
+  const handleKeyPress = (e) => {
+    if (e.key === `Enter`) handleClick();
+  };
+
   return (
     <SearchContainer>
       <TextField
@@ -14,6 +18,7 @@ const SearchBar = ({ queryText, setQueryText, handleClick }) => {
         value={queryText}
         onChange={(e) => setQueryText(e.target.value)}
         color="secondary"
+        onKeyPress={(e) => handleKeyPress(e)}
       />
       <Button
         style={{ padding: ".75em" }}

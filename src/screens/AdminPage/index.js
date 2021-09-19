@@ -4,10 +4,17 @@ import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { TextField, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import Slide from "@mui/material/Slide";
 
+import SnackBar from "components/SnackBar";
 import { HeaderThree } from "constants/fonts";
 import { DetailsMain, DetailsContainer, Row } from "../ProductDetail/styles";
 import { Section, RightColumn } from "./styles";
+
+function TransitionDown(props) {
+  return <Slide {...props} direction="down" />;
+}
 
 const AdminPage = () => {
   const [name, setName] = useState("");
@@ -16,16 +23,60 @@ const AdminPage = () => {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const [transition, setTransition] = useState(undefined);
+
   const history = useHistory();
+
+  const handleOpen = (newSeverity) => {
+    setTransition(() => TransitionDown);
+    setSeverity(newSeverity);
+    setOpen(true);
+  };
+
+  const handleSubmit = async () => {
+    await axios
+      .post("http://localhost:5000/product", {
+        name: name,
+        price: price,
+        length: length,
+        width: width,
+        height: height,
+        stock: stock,
+      })
+      .then((e) => {
+        console.log(e);
+        handleOpen("success");
+      })
+      .catch((e) => {
+        console.log("error: ", e.response.data);
+        handleOpen("error");
+      });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <DetailsMain>
+      {
+        <SnackBar
+          success="Product successfully created 🥳"
+          error="Mandatory fields not filled out."
+          severity={severity}
+          handleClose={handleClose}
+          open={open}
+          transition={transition}
+        />
+      }
       <DetailsContainer>
         <RightColumn style={{ paddingTop: ".5em" }}>
           <Section>
             <Row>
               <ArrowBackIcon
-                onClick={() => history.goBack()}
+                onClick={() => history.push("/")}
                 fontSize={"large"}
               />
               <HeaderThree>Admin - Create Product</HeaderThree>
@@ -77,11 +128,7 @@ const AdminPage = () => {
               onChange={(e) => setStock(e.target.value)}
               color="secondary"
             />
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => console.log("Create")}
-            >
+            <Button variant="outlined" color="primary" onClick={handleSubmit}>
               Create
             </Button>
           </Section>
