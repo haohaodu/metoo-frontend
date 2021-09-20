@@ -132,7 +132,7 @@ const ProductDetail = () => {
               reviews.length !== 0 &&
               reviews.map(({ id, rating }) => (
                 <HeaderFive key={id}>
-                  Annon rated Product Name {rating} out of 10 stars
+                  Annon rated Product Name {rating * 2} out of 10 stars
                 </HeaderFive>
               ))}
           </BorderedSection>
