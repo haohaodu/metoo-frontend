@@ -68,7 +68,7 @@ const ProductDetail = () => {
 
   const submitReview = async () => {
     await axios
-      .post("http://localhost:5000/review", {
+      .post("/review", {
         productId: product.id,
         rating: reviewRating,
       })

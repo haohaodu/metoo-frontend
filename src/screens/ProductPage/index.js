@@ -18,7 +18,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/products?name=${queryText}`)
+      .get(`/products?name=${queryText}`)
       .then(({ data: { data } }) => setProducts(data));
   }, []);
 
@@ -39,7 +39,7 @@ const ProductPage = () => {
     const typeStr = type === `instock` ? `instock=true` : ``;
     const queryUrl = `products?` + nameStr + typeStr;
     axios
-      .get(`http://localhost:5000/` + queryUrl)
+      .get(queryUrl)
       .then(({ data: { data } }) => setProducts(data))
       .catch((e) => {
         console.log("error: ", e);
