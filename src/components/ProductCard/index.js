@@ -28,14 +28,7 @@ const ProductCard = ({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button
-          onClick={() => {
-            console.log(`/product/${id}`);
-            handleClick(`/product/${id}`, id);
-          }}
-        >
-          View
-        </Button>
+        <Button onClick={() => handleClick(`/products/${id}`, id)}>View</Button>
       </CardActions>
     </Card>
   );
