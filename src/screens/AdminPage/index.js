@@ -37,7 +37,7 @@ const AdminPage = () => {
 
   const handleSubmit = async () => {
     await axios
-      .post("/product", {
+      .post("/products", {
         name: name,
         price: price,
         length: length,
