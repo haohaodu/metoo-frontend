@@ -16,7 +16,7 @@ const LandingPage = () => {
 
   const handleClick = () => {
     store.set("query", queryText);
-    history.push("/product");
+    history.push("/products");
   };
 
   return (
