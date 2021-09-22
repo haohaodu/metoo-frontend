@@ -47,17 +47,17 @@ const ProductDetail = () => {
   const [openModal, setOpenModal] = useState(false);
   const [transition, setTransition] = useState(undefined);
 
-  const { name, id, price, width, length, height, stock, reviews } = product;
+  let { name, id, price, width, length, height, stock, reviews } = product;
   const history = useHistory();
 
   useEffect(() => {
     let tempRating = 0;
     if (product.reviews.length !== 0) {
-      reviews.map(({ rating }) => (tempRating += rating));
+      reviews = reviews.map(({ rating }) => (tempRating += rating));
       setRating(() => tempRating / reviews.length);
     }
-
-    if (store.get("currProduct")) setProduct(store.get("currProduct"));
+    const currProduct = store.get("currProduct");
+    if (currProduct) setProduct(currProduct);
   }, []);
 
   const handleClose = () => {
@@ -76,6 +76,9 @@ const ProductDetail = () => {
       .catch((e) => console.log("error params: ", e.message.params));
     handleClose();
   };
+
+  console.log("curr product: ", product);
+  console.log("rating: ", rating);
 
   return (
     <DetailsMain>
