@@ -8,10 +8,10 @@ import axios from "axios";
 import "./index.css";
 
 if (process.env.REACT_APP_DEPLOY_ENV === "dev") {
-  console.log("react app is dev.");
+  console.log("react app is dev 2.");
   axios.defaults.baseURL = process.env.REACT_APP_DEV_API_URL;
 } else {
-  console.log("react app is prod.");
+  console.log("react app is prod 2.");
   axios.defaults.baseURL = process.env.REACT_APP_PROD_API_URL;
 }
 
