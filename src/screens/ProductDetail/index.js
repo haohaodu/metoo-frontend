@@ -53,7 +53,7 @@ const ProductDetail = () => {
   useEffect(() => {
     let tempRating = 0;
     if (product.reviews.length !== 0) {
-      reviews = reviews.map(({ rating }) => (tempRating += rating));
+      reviews.map(({ rating }) => (tempRating += rating));
       setRating(() => tempRating / reviews.length);
     }
     const currProduct = store.get("currProduct");

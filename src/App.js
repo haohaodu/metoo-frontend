@@ -24,8 +24,8 @@ const App = () => {
         <StickyHeader />
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/product" exact component={ProductPage} />
-          <Route path="/product/:id" exact component={ProductDetail} />
+          <Route path="/products" exact component={ProductPage} />
+          <Route path="/products/:id" exact component={ProductDetail} />
           <Route path="/admin" exact component={AdminPage} />
         </Switch>
       </Router>
