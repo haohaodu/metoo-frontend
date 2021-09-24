@@ -20,45 +20,42 @@ import {
   Section,
   Row,
   BorderedSection,
+  RatingsText,
 } from "./styles";
-
-const exampleProduct = {
-  name: "John Doe",
-  id: 1,
-  price: 29.99,
-  width: 1,
-  length: 1,
-  height: 1,
-  stock: 1,
-  reviews: [],
-};
 
 function TransitionDown(props) {
   return <Slide {...props} direction="down" />;
 }
 
 const ProductDetail = () => {
-  const [product, setProduct] = useState(exampleProduct);
+  const [product, setProduct] = useState(store.get("currProduct"));
   const [rating, setRating] = useState(2.5);
   const [showReviews, setShowReviews] = useState(false);
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   const [reviewRating, setReviewRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [transition, setTransition] = useState(undefined);
 
-  let { name, id, price, width, length, height, stock, reviews } = product;
+  let { name, _id, price, width, length, height, stock } = product;
   const history = useHistory();
 
+  const getReviews = async (id) => {
+    return await axios
+      .get(`/reviews/products/${id}`)
+      .then(({ data: { data } }) => {
+        let tempRating = 0;
+        data.map(({ rating }) => (tempRating += rating));
+        setRating(tempRating / data.length);
+        setReviews(data);
+      })
+      .catch((e) => console.log("error when retrieving /review/products", e));
+  };
+
   useEffect(() => {
-    let tempRating = 0;
-    if (product.reviews.length !== 0) {
-      reviews.map(({ rating }) => (tempRating += rating));
-      setRating(() => tempRating / reviews.length);
-    }
-    const currProduct = store.get("currProduct");
-    if (currProduct) setProduct(currProduct);
-  }, []);
+    getReviews(product._id);
+  }, [openModal, product._id]);
 
   const handleClose = () => {
     setOpenModal(false);
@@ -68,17 +65,14 @@ const ProductDetail = () => {
 
   const submitReview = async () => {
     await axios
-      .post("/review", {
-        productId: product.id,
+      .post("/reviews", {
+        product_id: product._id,
         rating: reviewRating,
       })
       .then(({ data: { message } }) => console.log("Success! ", message))
       .catch((e) => console.log("error params: ", e.message.params));
     handleClose();
   };
-
-  console.log("curr product: ", product);
-  console.log("rating: ", rating);
 
   return (
     <DetailsMain>
@@ -101,9 +95,11 @@ const ProductDetail = () => {
                 name="read-only"
                 readOnly
               />
-              ({reviews.length} ratings)
+              <RatingsText onClick={() => setOpenModal(true)}>
+                ({reviews.length} ratings)
+              </RatingsText>
             </Row>
-            <HeaderFive>Product ID #: {id}</HeaderFive>
+            <HeaderFive>Product ID #: {_id}</HeaderFive>
           </Section>
 
           <Section>
@@ -119,22 +115,14 @@ const ProductDetail = () => {
           </Section>
 
           <Row>
-            <Button
-              variant="contained"
-              onClick={() => setShowReviews(!showReviews)}
-            >
-              {!showReviews ? "Show Reviews" : "Hide Reviews"}
-            </Button>
-            <Button variant="contained" onClick={() => setOpenModal(true)}>
-              Leave a Review
-            </Button>
+            <Button variant="contained">Add to Cart</Button>
+            <Button variant="contained">Checkout Now</Button>
           </Row>
 
           <BorderedSection>
-            {showReviews &&
-              reviews.length !== 0 &&
-              reviews.map(({ id, rating }) => (
-                <HeaderFive key={id}>
+            {reviews.length !== 0 &&
+              reviews.map(({ _id, rating }) => (
+                <HeaderFive key={_id}>
                   Annon rated Product Name {rating * 2} out of 10 stars
                 </HeaderFive>
               ))}

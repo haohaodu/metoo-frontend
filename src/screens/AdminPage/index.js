@@ -57,6 +57,7 @@ const AdminPage = () => {
 
   const handleClose = () => {
     setOpen(false);
+    history.push("/products");
   };
 
   return (

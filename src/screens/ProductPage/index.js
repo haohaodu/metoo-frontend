@@ -27,10 +27,8 @@ const ProductPage = () => {
   };
 
   const handleClick = (newUrl, productId) => {
-    store.set(
-      "currProduct",
-      products.find(({ id }) => productId === id)
-    );
+    const newProduct = products.find(({ _id }) => productId === _id);
+    store.set("currProduct", newProduct);
     history.push(newUrl);
   };
 
@@ -47,6 +45,8 @@ const ProductPage = () => {
       });
   };
 
+  console.log("products: ", products);
+
   return (
     <ProductMain>
       <SearchContainer>
@@ -60,11 +60,11 @@ const ProductPage = () => {
         </QueryTypes>
         {products &&
           products.length !== 0 &&
-          products.map(({ name, id, price, width, length, height, stock }) => (
+          products.map(({ name, _id, price, width, length, height, stock }) => (
             <ProductCard
-              key={id}
+              key={_id}
               name={name}
-              id={id}
+              id={_id}
               price={price}
               width={width}
               length={length}

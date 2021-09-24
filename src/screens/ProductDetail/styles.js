@@ -1,5 +1,6 @@
 /** @format */
 
+import { secondary50 } from "constants/colors";
 import styled from "styled-components";
 
 export const DetailsMain = styled.div`
@@ -55,4 +56,12 @@ export const BorderedSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0em;
+  overflow-y: scroll;
+`;
+
+export const RatingsText = styled.div`
+  font-weight: 500;
+  font-size: 1em;
+  color: ${secondary50};
+  cursor: pointer;
 `;
