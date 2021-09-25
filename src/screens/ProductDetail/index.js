@@ -30,8 +30,8 @@ function TransitionDown(props) {
 const ProductDetail = () => {
   const [product, setProduct] = useState(store.get("currProduct"));
   const [rating, setRating] = useState(2.5);
-  const [showReviews, setShowReviews] = useState(false);
-  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [productSnackBar, setProductSnackBar] = useState(false);
+  const [reviewSnackBar, setReviewSnackBar] = useState(false);
   const [reviews, setReviews] = useState([]);
 
   const [reviewRating, setReviewRating] = useState(0);
@@ -60,7 +60,7 @@ const ProductDetail = () => {
   const handleClose = () => {
     setOpenModal(false);
     setTransition(() => TransitionDown);
-    setOpenSnackBar(true);
+    setReviewSnackBar(true);
   };
 
   const submitReview = async () => {
@@ -77,7 +77,6 @@ const ProductDetail = () => {
   return (
     <DetailsMain>
       <DetailsContainer>
-        <LeftColumn></LeftColumn>
         <RightColumn>
           <Section>
             <Row>
@@ -115,7 +114,12 @@ const ProductDetail = () => {
           </Section>
 
           <Row>
-            <Button variant="contained">Add to Cart</Button>
+            <Button
+              variant="contained"
+              onClick={() => setProductSnackBar(true)}
+            >
+              Add to Cart
+            </Button>
             <Button variant="contained">Checkout Now</Button>
           </Row>
 
@@ -144,8 +148,16 @@ const ProductDetail = () => {
         success="Review successfully posted 🥳"
         error="Mandatory information not filled out."
         severity={"success"}
-        handleClose={() => setOpenSnackBar(false)}
-        open={openSnackBar}
+        handleClose={() => setReviewSnackBar(false)}
+        open={reviewSnackBar}
+        transition={transition}
+      />
+      <SnackBar
+        success="Product successfully added to cart 🥳"
+        error="Unable to add product to cart."
+        severity={"success"}
+        handleClose={() => setProductSnackBar(false)}
+        open={productSnackBar}
         transition={transition}
       />
     </DetailsMain>

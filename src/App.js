@@ -7,6 +7,7 @@ import LandingPage from "screens/LandingPage";
 import ProductPage from "screens/ProductPage";
 import ProductDetail from "screens/ProductDetail";
 import AdminPage from "screens/AdminPage";
+import CartPage from "screens/CartPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/products" exact component={ProductPage} />
           <Route path="/products/:id" exact component={ProductDetail} />
           <Route path="/admin" exact component={AdminPage} />
+          <Route path="/cart" exact component={CartPage} />
         </Switch>
       </Router>
     </ThemeProvider>

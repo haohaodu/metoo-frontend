@@ -16,7 +16,7 @@ export const HeaderThree = styled.div`
 `;
 
 export const HeaderTwo = styled.div`
-  font-weight: 300;
+  font-weight: 600;
   font-size: 4em;
 `;
 
@@ -24,4 +24,14 @@ export const BodyTwo = styled.div`
   font-weight: 700;
   font-size: 0.75em;
   color: black;
+`;
+
+export const BodyOne = styled.div`
+  font-weight: 700;
+  font-size: 0.8em;
+`;
+
+export const SubtitleOne = styled.div`
+  font-size: 1em;
+  font-weight: 400;
 `;

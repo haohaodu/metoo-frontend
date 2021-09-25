@@ -24,14 +24,13 @@ export const RatingContainer = styled.div`
   width: 100%;
 `;
 
-export const ModalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "white",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+export const ModalStyle = styled.div`
+  position: "absolute";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  width: 400;
+  bgcolor: "white";
+  border: "2px solid #000";
+  boxshadow: 24;
+`;

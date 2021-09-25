@@ -20,7 +20,7 @@ export const HeaderInner = styled.div`
 
 export const RightContainer = styled.div`
   display: flex;
-  gap: 1.5em;
+  gap: 3em;
 `;
 
 export const Logo = styled.img`

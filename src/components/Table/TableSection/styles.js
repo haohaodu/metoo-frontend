@@ -1,0 +1,45 @@
+/** @format */
+
+import styled from "styled-components";
+
+export const TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7.5em;
+`;
+
+export const TableWhiteDiv = styled.div`
+  width: 100%;
+  height: 0.25em;
+  background-color: ${({ color }) => color};
+`;
+
+export const TableRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const DescriptionColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 4em;
+  width: 15em;
+`;
+
+export const ProductRowDiv = styled.div`
+  display: flex;
+  width: 25%;
+  justify-content: space-between;
+  padding: 0 2em;
+`;
+
+export const QuantityContainer = styled.div`
+  padding: 0 0 0 0em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+`;
