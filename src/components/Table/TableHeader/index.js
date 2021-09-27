@@ -21,7 +21,7 @@ const TableHeader = ({ titleOne, titleTwo, titleThree, titleFour }) => {
         </DescriptionCol>
         <TableHeaderDiv>
           <SubtitleOne>{titleTwo}</SubtitleOne>
-          <SubtitleOne>{titleThree}</SubtitleOne>
+          {/* <SubtitleOne>{titleThree}</SubtitleOne> */}
         </TableHeaderDiv>
         <SubtitleOne>{titleFour}</SubtitleOne>
       </TableRow>

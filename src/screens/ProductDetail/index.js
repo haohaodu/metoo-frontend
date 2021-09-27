@@ -15,10 +15,9 @@ import { HeaderFive, HeaderThree } from "constants/fonts";
 import {
   DetailsMain,
   DetailsContainer,
-  LeftColumn,
-  RightColumn,
   Section,
   Row,
+  RightColumn,
   BorderedSection,
   RatingsText,
 } from "./styles";
@@ -61,6 +60,19 @@ const ProductDetail = () => {
     setOpenModal(false);
     setTransition(() => TransitionDown);
     setReviewSnackBar(true);
+  };
+
+  const addToCart = () => {
+    let cart = store.get("cart");
+    const productIndex = cart.findIndex((product) => product._id === _id);
+
+    // add new product to cart or add quantity
+    if (productIndex === -1) cart.push({ ...product, quantity: 1 });
+    else cart[productIndex].quantity++;
+
+    // update global cart
+    store.set("cart", cart);
+    setProductSnackBar(true);
   };
 
   const submitReview = async () => {
@@ -114,10 +126,7 @@ const ProductDetail = () => {
           </Section>
 
           <Row>
-            <Button
-              variant="contained"
-              onClick={() => setProductSnackBar(true)}
-            >
+            <Button variant="contained" onClick={() => addToCart()}>
               Add to Cart
             </Button>
             <Button variant="contained">Checkout Now</Button>

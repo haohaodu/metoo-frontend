@@ -1,28 +1,35 @@
 /** @format */
 
-import React from "react";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button } from "@mui/material";
+
+import store from "store";
 
 import { DetailsMain } from "../ProductDetail/styles";
-import { HeaderTwo, HeaderFive, SubtitleOne, BodyOne } from "constants/fonts";
-import {
-  HeaderRow,
-  TableRow,
-  TableHeaderDiv,
-  TableSection,
-  TableWhiteDiv,
-  CartContainer,
-  HeaderSection,
-  DescriptionColumn,
-  DescriptionCol,
-  ProductRowDiv,
-  QuantityContainer,
-} from "./styles";
+import { HeaderTwo } from "constants/fonts";
+import { HeaderRow, CartContainer, ButtonWrapper } from "./styles";
 import Table from "components/Table";
-import { white, black } from "constants/colors";
 
 const CartPage = () => {
+  const [cart, setCart] = useState(store.get("cart"));
+
+  const handleOrder = async () => {
+    console.log("cart: ", cart);
+    await axios
+      .post("/orders", {
+        name: "HaoHao",
+        products: cart,
+      })
+      .then((data) => console.log("success! ", data))
+      .catch((e) => {
+        console.log("error params: ", e);
+        console.log(e.message);
+        console.log(e.errors);
+        console.log(e.message.params);
+      });
+  };
+
   return (
     <DetailsMain>
       <CartContainer>
@@ -31,41 +38,11 @@ const CartPage = () => {
           <HeaderTwo>Cart</HeaderTwo>
         </HeaderRow>
         {/* Table Top Row */}
-        <Table />
-        <TableSection>
-          <TableWhiteDiv color={black} />
-          <TableRow>
-            <DescriptionColumn>
-              <HeaderFive>Streamline Leggings</HeaderFive>
-              <BodyOne>Product Code: 1234567890</BodyOne>
-            </DescriptionColumn>
-            <ProductRowDiv>
-              <QuantityContainer>
-                <AddIcon /> 1 <RemoveIcon />
-              </QuantityContainer>
-              <SubtitleOne>X</SubtitleOne>
-            </ProductRowDiv>
-            <SubtitleOne>$55.00</SubtitleOne>
-          </TableRow>
-          <TableWhiteDiv color={white} />
-        </TableSection>
-        <TableSection>
-          <TableWhiteDiv color={black} />
-          <TableRow>
-            <DescriptionColumn>
-              <HeaderFive>Streamline Leggings</HeaderFive>
-              <BodyOne>Product Code: 1234567890</BodyOne>
-            </DescriptionColumn>
-            <ProductRowDiv>
-              <QuantityContainer>
-                <AddIcon /> 1 <RemoveIcon />
-              </QuantityContainer>
-              <SubtitleOne>X</SubtitleOne>
-            </ProductRowDiv>
-            <SubtitleOne>$55.00</SubtitleOne>
-          </TableRow>
-          <TableWhiteDiv color={white} />
-        </TableSection>
+        <Table cart={cart} setCart={setCart} />
+
+        <ButtonWrapper>
+          <Button onClick={handleOrder}>Checkout</Button>
+        </ButtonWrapper>
       </CartContainer>
     </DetailsMain>
   );

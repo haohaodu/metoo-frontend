@@ -34,12 +34,19 @@ export const ProductRowDiv = styled.div`
   display: flex;
   width: 25%;
   justify-content: space-between;
-  padding: 0 2em;
+  align-items: center;
 `;
 
 export const QuantityContainer = styled.div`
-  padding: 0 0 0 0em;
+  padding: 0 0 0 1em;
   display: flex;
   align-items: center;
   gap: 0.5em;
+`;
+
+export const ProductContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 8%;
 `;

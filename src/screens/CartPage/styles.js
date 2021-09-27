@@ -74,3 +74,10 @@ export const QuantityContainer = styled.div`
   align-items: center;
   gap: 0.5em;
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 2em;
+`;

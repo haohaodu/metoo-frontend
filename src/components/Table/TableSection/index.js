@@ -11,31 +11,48 @@ import {
   DescriptionColumn,
   ProductRowDiv,
   QuantityContainer,
+  ProductContainer,
 } from "./styles";
 import { HeaderFive, SubtitleOne, BodyOne } from "constants/fonts";
 import { white, black } from "constants/colors";
 
-const TableSection = ({ title, id, quantity, price }) => {
+const TableSection = ({
+  name,
+  id,
+  stock,
+  price,
+  quantity,
+  addOneStock,
+  minusOneStock,
+}) => {
   return (
-    <div>
-      <TableContainer>
-        <TableWhiteDiv color={black} />
-        <TableRow>
-          <DescriptionColumn>
-            <HeaderFive>{title}</HeaderFive>
-            <BodyOne>Product Code: {id}</BodyOne>
-          </DescriptionColumn>
-          <ProductRowDiv>
-            <QuantityContainer>
-              <AddIcon /> {quantity} <RemoveIcon />
-            </QuantityContainer>
-            <SubtitleOne>X</SubtitleOne>
-          </ProductRowDiv>
-          <SubtitleOne>${price}.00</SubtitleOne>
-        </TableRow>
-        <TableWhiteDiv color={white} />
-      </TableContainer>
-    </div>
+    quantity > 0 && (
+      <div>
+        <TableContainer>
+          <TableWhiteDiv color={black} />
+          <TableRow>
+            <DescriptionColumn>
+              <HeaderFive>{name}</HeaderFive>
+              <BodyOne>Product Code: {id}</BodyOne>
+            </DescriptionColumn>
+            <ProductRowDiv>
+              <QuantityContainer>
+                <AddIcon onClick={addOneStock} style={{ cursor: "pointer" }} />
+                {quantity}
+                <RemoveIcon
+                  onClick={minusOneStock}
+                  style={{ cursor: "pointer" }}
+                />
+              </QuantityContainer>
+            </ProductRowDiv>
+            <ProductContainer>
+              <SubtitleOne>${price}.00</SubtitleOne>
+            </ProductContainer>
+          </TableRow>
+          <TableWhiteDiv color={white} />
+        </TableContainer>
+      </div>
+    )
   );
 };
 

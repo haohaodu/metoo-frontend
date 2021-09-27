@@ -2,6 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import store from "store";
 import App from "./App";
 
 import axios from "axios";
@@ -21,6 +22,8 @@ console.log("REACT_APP_PROD_API_URL", process.env.REACT_APP_PROD_API_URL);
 
 console.log("REACT_APP_DEPLOY_ENV: ", process.env.REACT_APP_DEPLOY_ENV);
 console.log("axios.defaults.baseURL: ", axios.defaults.baseURL);
+
+store.set("cart", []);
 
 ReactDOM.render(
   <React.StrictMode>

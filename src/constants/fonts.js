@@ -28,7 +28,7 @@ export const BodyTwo = styled.div`
 
 export const BodyOne = styled.div`
   font-weight: 700;
-  font-size: 0.8em;
+  font-size: 0.7em;
 `;
 
 export const SubtitleOne = styled.div`
