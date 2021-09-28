@@ -13,6 +13,9 @@ const Header = () => (
         <Logo src={logo} alt="Logo" />
       </Link>
       <RightContainer>
+        <Link to="/order" style={{ textDecoration: "none" }}>
+          <HeaderFive>Orders</HeaderFive>
+        </Link>
         <Link to="/cart" style={{ textDecoration: "none" }}>
           <HeaderFive>Cart</HeaderFive>
         </Link>

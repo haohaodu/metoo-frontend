@@ -27,7 +27,6 @@ function TransitionDown(props) {
 }
 
 const ProductDetail = () => {
-  const [product, setProduct] = useState(store.get("currProduct"));
   const [rating, setRating] = useState(2.5);
   const [productSnackBar, setProductSnackBar] = useState(false);
   const [reviewSnackBar, setReviewSnackBar] = useState(false);
@@ -36,6 +35,7 @@ const ProductDetail = () => {
   const [reviewRating, setReviewRating] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [transition, setTransition] = useState(undefined);
+  const product = store.get("currProduct");
 
   let { name, _id, price, width, length, height, stock } = product;
   const history = useHistory();

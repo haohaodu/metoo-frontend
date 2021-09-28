@@ -7,7 +7,7 @@ import { TableSectionWrapper } from "./styles";
 import TableHeader from "./TableHeader";
 import TableSection from "./TableSection";
 
-const Table = ({ cart, setCart }) => {
+const Table = ({ cart, setCart, type }) => {
   const addOneStock = (index) => {
     let cartCopy = [...cart];
     cartCopy[index].quantity += 1;
@@ -22,31 +22,52 @@ const Table = ({ cart, setCart }) => {
     setCart(cartCopy);
   };
 
+  let tableSection = null;
+
+  if (type === "product" || type === "curr_order") {
+    tableSection = cart.map((product, index) => {
+      const { name, _id, quantity, price } = product;
+      return (
+        <TableSection
+          key={index}
+          name={name}
+          type={type}
+          id={_id}
+          quantity={quantity}
+          price={price}
+          addOneStock={() => addOneStock(index)}
+          minusOneStock={() => minusOneStock(index)}
+          cart={cart}
+          index={index}
+        />
+      );
+    });
+  } else if (type === "order")
+    tableSection = cart.map((order, index) => {
+      const { name, _id } = order;
+      return (
+        <TableSection
+          key={index}
+          name={name}
+          type={type}
+          id={_id}
+          cart={cart}
+          index={index}
+        />
+      );
+    });
+
   return (
     <div>
-      <TableHeader
-        titleOne="Description"
-        titleTwo="Quantity"
-        titleThree="Remove"
-        titleFour="Price"
-      />
-      <TableSectionWrapper>
-        {cart.map((product, index) => {
-          const { name, _id, stock, quantity, price } = product;
-          return (
-            <TableSection
-              key={index}
-              name={name}
-              id={_id}
-              stock={stock}
-              quantity={quantity}
-              price={price}
-              addOneStock={() => addOneStock(index)}
-              minusOneStock={() => minusOneStock(index)}
-            />
-          );
-        })}
-      </TableSectionWrapper>
+      {type === "product" && (
+        <TableHeader
+          titleOne="Description"
+          titleTwo="Quantity"
+          titleThree="Remove"
+          titleFour="Price"
+        />
+      )}
+      <TableSectionWrapper>{tableSection}</TableSectionWrapper>
     </div>
   );
 };

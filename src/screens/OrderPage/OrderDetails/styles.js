@@ -2,11 +2,22 @@
 
 import styled from "styled-components";
 
-export const TableContainer = styled.div`
+export const HeaderRow = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 3em;
+`;
+
+export const TableRow = styled.div`
+  display: flex;
   justify-content: space-between;
-  height: 7.5em;
+  align-items: center;
+`;
+
+export const TableHeaderDiv = styled.div`
+  display: flex;
+  width: 25%;
+  justify-content: space-between;
 `;
 
 export const TableWhiteDiv = styled.div`
@@ -15,10 +26,27 @@ export const TableWhiteDiv = styled.div`
   background-color: ${({ color }) => color};
 `;
 
-export const TableRow = styled.div`
+export const HeaderSection = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  height: 5em;
+`;
+
+export const TableSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7.5em;
+`;
+
+export const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  margin-top: 10em;
 `;
 
 export const DescriptionColumn = styled.div`
@@ -30,25 +58,22 @@ export const DescriptionColumn = styled.div`
   width: 15em;
 `;
 
+export const DescriptionCol = styled.div`
+  width: 15em;
+`;
+
 export const ProductRowDiv = styled.div`
   display: flex;
   width: 25%;
   justify-content: space-between;
-  align-items: center;
+  padding: 0 2em;
 `;
 
 export const QuantityContainer = styled.div`
-  padding: 0 0 0 1em;
+  padding: 0 0 0 0em;
   display: flex;
   align-items: center;
   gap: 0.5em;
-`;
-
-export const ProductContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 8%;
 `;
 
 export const ButtonWrapper = styled.div`

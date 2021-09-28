@@ -9,7 +9,11 @@ import Slide from "@mui/material/Slide";
 
 import SnackBar from "components/SnackBar";
 import { HeaderThree } from "constants/fonts";
-import { DetailsMain, DetailsContainer, Row } from "../ProductDetail/styles";
+import {
+  DetailsMain,
+  DetailsContainer,
+  Row,
+} from "../ProductPage/ProductDetail/styles";
 import { Section, RightColumn } from "./styles";
 
 function TransitionDown(props) {

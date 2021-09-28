@@ -24,6 +24,7 @@ console.log("REACT_APP_DEPLOY_ENV: ", process.env.REACT_APP_DEPLOY_ENV);
 console.log("axios.defaults.baseURL: ", axios.defaults.baseURL);
 
 store.set("cart", []);
+store.set("curr_order", []);
 
 ReactDOM.render(
   <React.StrictMode>

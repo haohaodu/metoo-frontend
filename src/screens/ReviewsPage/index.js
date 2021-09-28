@@ -12,7 +12,7 @@ import {
   RightColumn,
   Section,
   Row,
-} from "../ProductDetail/styles";
+} from "../ProductPage/ProductDetail/styles";
 
 const ProductDetail = () => {
   return (
