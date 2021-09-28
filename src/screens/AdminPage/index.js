@@ -66,16 +66,15 @@ const AdminPage = () => {
 
   return (
     <DetailsMain>
-      {
-        <SnackBar
-          success="Product successfully created 🥳"
-          error="Mandatory fields not filled out."
-          severity={severity}
-          handleClose={handleClose}
-          open={open}
-          transition={transition}
-        />
-      }
+      <SnackBar
+        success="Product successfully created 🥳"
+        error="Mandatory fields not filled out."
+        severity={severity}
+        handleClose={handleClose}
+        open={open}
+        transition={transition}
+      />
+
       <DetailsContainer>
         <RightColumn style={{ paddingTop: ".5em" }}>
           <Section>

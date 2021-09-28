@@ -33,9 +33,10 @@ const ProductPage = () => {
   };
 
   const handleSearch = () => {
-    const nameStr = queryText ? `name=` + queryText + `&` : ``;
+    const nameStr = queryText.length !== 0 ? `name=` + queryText + `&` : ``;
     const typeStr = type === `instock` ? `instock=true` : ``;
     const queryUrl = `products?` + nameStr + typeStr;
+    console.log("query url: ", queryUrl);
     axios
       .get(queryUrl)
       .then(({ data: { data } }) => setProducts(data))

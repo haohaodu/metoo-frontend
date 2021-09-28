@@ -10,10 +10,8 @@ import { HeaderRow, CartContainer } from "./styles";
 
 const OrderDetails = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState(store.get("curr_order"));
   const [quantityList, setQuantityList] = useState([]);
-
-  console.log("cart: ", cart);
+  const cart = store.get("curr_order");
 
   useEffect(() => {
     const getProducts = async () => {

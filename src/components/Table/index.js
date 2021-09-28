@@ -27,6 +27,7 @@ const Table = ({ cart, setCart, type }) => {
   if (type === "product" || type === "curr_order") {
     tableSection = cart.map((product, index) => {
       const { name, _id, quantity, price } = product;
+      if (quantity < 1) return true;
       return (
         <TableSection
           key={index}
