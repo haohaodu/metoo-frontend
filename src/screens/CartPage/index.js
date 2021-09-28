@@ -25,7 +25,9 @@ const CartPage = () => {
       })
       .then((data) => {
         console.log("success! ", data);
+        store.set("cart", []);
         setSubmitted(!submitted);
+        setCart([]);
       })
       .catch((e) => console.log("error params: ", e));
   };

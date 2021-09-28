@@ -41,15 +41,23 @@ const ProductDetail = () => {
   const history = useHistory();
 
   const getReviews = async (id) => {
+    let tempRating = 0;
     return await axios
       .get(`/reviews/products/${id}`)
       .then(({ data: { data } }) => {
-        let tempRating = 0;
-        data.map(({ rating }) => (tempRating += rating));
-        setRating(tempRating / data.length);
-        setReviews(data);
+        console.log("data: ", data);
+        if (data.length !== 0) {
+          data.map(({ rating }) => (tempRating += rating));
+          setRating(tempRating / data.length);
+          setReviews(data);
+        }
       })
       .catch((e) => console.log("error when retrieving /review/products", e));
+  };
+
+  const openReviews = () => {
+    console.log("reviews: ", reviews);
+    setOpenModal(true);
   };
 
   useEffect(() => {
@@ -106,7 +114,7 @@ const ProductDetail = () => {
                 name="read-only"
                 readOnly
               />
-              <RatingsText onClick={() => setOpenModal(true)}>
+              <RatingsText onClick={openReviews}>
                 ({reviews.length} ratings)
               </RatingsText>
             </Row>
@@ -129,7 +137,6 @@ const ProductDetail = () => {
             <Button variant="contained" onClick={() => addToCart()}>
               Add to Cart
             </Button>
-            <Button variant="contained">Checkout Now</Button>
           </Row>
 
           <BorderedSection>
@@ -149,7 +156,7 @@ const ProductDetail = () => {
           name={name}
           rating={reviewRating}
           setRating={setReviewRating}
-          handleSubmit={submitReview}
+          handleSubmit={() => submitReview()}
         />
       )}
 

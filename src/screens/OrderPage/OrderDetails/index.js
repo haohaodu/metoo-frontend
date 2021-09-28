@@ -5,20 +5,22 @@ import axios from "axios";
 import store from "store";
 
 import { DetailsMain } from "../../ProductPage/ProductDetail/styles";
-import { HeaderTwo } from "constants/fonts";
+import { HeaderFive } from "constants/fonts";
 import { HeaderRow, CartContainer } from "./styles";
 
 const OrderDetails = () => {
   const [products, setProducts] = useState([]);
-  const cart = useState(store.get("curr_order"));
+  const [cart, setCart] = useState(store.get("curr_order"));
   const [quantityList, setQuantityList] = useState([]);
+
+  console.log("cart: ", cart);
 
   useEffect(() => {
     const getProducts = async () => {
       let promises = [];
 
       // get all product values
-      cart[0].map(({ _id, quantity }) => {
+      cart.products.map(({ _id, quantity }) => {
         promises.push(axios.get(`/products/${_id}`));
         setQuantityList([...quantityList, quantity]);
         return true;
@@ -29,7 +31,7 @@ const OrderDetails = () => {
 
       // get all quantity values
       let quantityCopy = [...quantityList];
-      cart[0].map(({ quantity }) => quantityCopy.push(quantity));
+      cart.products.map(({ quantity }) => quantityCopy.push(quantity));
 
       setQuantityList(quantityCopy);
     };
@@ -41,20 +43,20 @@ const OrderDetails = () => {
       <CartContainer>
         {/* Table Title */}
         <HeaderRow>
-          <HeaderTwo>Single Order</HeaderTwo>
+          <HeaderFive>Order Code: {cart._id} </HeaderFive>
         </HeaderRow>
         {products.map((data, index) => {
           const {
             data: {
-              data: { _id, price, stock },
+              data: { _id, price, name },
             },
           } = data;
           return (
             <div key={_id} style={{ margin: ".75em" }}>
-              <div>Product ID: {_id}</div>
+              <div>Product Name: {name}</div>
               <div>Quantity: {quantityList[index]}</div>
               <div>Price: {price}</div>
-              <div>Stock: {stock}</div>
+              <div>Product ID: {_id}</div>
             </div>
           );
         })}

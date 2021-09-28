@@ -34,7 +34,7 @@ const TableSection = ({
 
   const handleViewOrder = () => {
     history.push(`/order/${id}`);
-    store.set("curr_order", cart[index].products);
+    store.set("curr_order", cart[index]);
   };
 
   let lastColumn = null;
